@@ -28,17 +28,29 @@ public class LinearEquation {
     public String equation() { //checks if slope is negative to prevent double negatives or negatives in delta x
         int deltaX = deltaX();
         int deltaY = deltaY();
+        String isYIntNegative = " + ";
+        String yInt = "";
+        double yIntValue = yIntercept();
+        if (yIntercept()<0){
+            isYIntNegative = " - ";
+            yIntValue = yIntercept() * -1;
+        }
+        if (yIntercept() != 0){
+            yInt = isYIntNegative+yIntValue;
+        }
         if (deltaX() < 0) {
             deltaX = deltaX() * -1;
             deltaY = deltaY() * -1;
         }
-        if ((double)deltaY/deltaX == 1) { //checks if slope is 1 and leaves just x if it is
-            return "y = " + "x + " + yIntercept();
-        }else if ((double)deltaY/deltaX == -1) { //checks if slope is -1 and leaves -x if it is
-            return "y = " + "-" + "x + " + yIntercept();
-        }else if (deltaY % deltaX == 0){
-            return "y = "+deltaY/deltaX+"x + " + yIntercept();
-        }else return "y = "+deltaY+"/"+deltaX+"x + " + yIntercept();
+        if ((double) deltaY / deltaX == 1) { //checks if slope is 1 and leaves just x if it is
+            return "y = " + "x"+yInt;
+        } else if ((double) deltaY / deltaX == -1) { //checks if slope is -1 and leaves -x if it is
+            return "y = -x"+yInt;
+        } else if (deltaY % deltaX == 0) {
+            return "y = " + deltaY / deltaX + "x"+yInt;
+        } else if ((double)deltaY/deltaX == 0){
+            return "y = "+yInt;
+        }return "y = " + deltaY + "/" + deltaX + "x"+yInt;
     }
     public String lineInfo(){ //returns all info above
         return "The two points are: ("+x1+","+" "+y1+")"+" and "+"("+x2+","+" "+y2+")"+"\nThe equation of the line between these two points is: "+equation()+"\nThe slope of this line is: "+slope()+"\nThe y-intercept of the line is: "+yIntercept()+"\nThe distance between the two points is: "+distance();
