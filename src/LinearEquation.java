@@ -14,7 +14,7 @@ public class LinearEquation {
         return roundedToHundredths(Math.hypot((x2-x1), (y2-y1)));
     }
     public double slope(){ //finds slope of 2 points
-        return roundedToHundredths(y2-y1)/(x2-x1);
+        return roundedToHundredths(((double) y2-y1)/((double) x2-x1));
     }
     public int deltaY(){ //finds change in y
         return y2-y1;
@@ -23,7 +23,7 @@ public class LinearEquation {
         return x2-x1;
     }
     public double yIntercept(){ //finds y-int by solving for b in y=mx+b
-        return y1-(slope()*x1);
+        return roundedToHundredths(y1-(slope()*x1));
     }
     public String equation() { //checks if slope is negative to prevent double negatives or negatives in delta x
         int deltaX = deltaX();
@@ -46,19 +46,19 @@ public class LinearEquation {
             return "y = " + "x"+yInt;
         } else if ((double) deltaY / deltaX == -1) { //checks if slope is -1 and leaves -x if it is
             return "y = -x"+yInt;
-        } else if (deltaY % deltaX == 0) {
+        }  else if ((double)deltaY/deltaX == 0) {
+            return "y = " + yIntercept();
+        }else if (deltaY % deltaX == 0) {
             return "y = " + deltaY / deltaX + "x"+yInt;
-        } else if ((double)deltaY/deltaX == 0){
-            return "y = "+yInt;
-        }return "y = " + deltaY + "/" + deltaX + "x"+yInt;
+        } return "y = " + deltaY + "/" + deltaX + "x"+yInt;
     }
     public String lineInfo(){ //returns all info above
-        return "The two points are: ("+x1+","+" "+y1+")"+" and "+"("+x2+","+" "+y2+")"+"\nThe equation of the line between these two points is: "+equation()+"\nThe slope of this line is: "+slope()+"\nThe y-intercept of the line is: "+yIntercept()+"\nThe distance between the two points is: "+distance();
+        return "The two points are: ("+x1+","+" "+y1+")"+" and "+"("+x2+","+" "+y2+")"+"\nThe equation of the line between these two points is: "+equation()+"\nThe slope of this line is: "+roundedToHundredths(slope())+"\nThe y-intercept of the line is: "+yIntercept()+"\nThe distance between the two points is: "+distance();
     }
     public String coordinateForX(double yValue){
-        return "("+yValue+", "+(roundedToHundredths(yValue*slope())+yIntercept())+")";
+        return "("+yValue+", "+(roundedToHundredths(yValue*slope()+yIntercept()))+")";
     }
     public double roundedToHundredths(double toRound){ //rounds
-        return 0.01*Math.floor(toRound*100);
+        return (double) Math.round(toRound * 100.0) / 100.0;
     }
 }
