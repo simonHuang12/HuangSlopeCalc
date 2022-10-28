@@ -19,11 +19,11 @@ public class LinearEquationRunner {
         if (x1 == x2) { //checks for undef slope
             System.out.println("The equation will be a vertical line: x = " + x1);
         } else {
-            LinearEquation equation = new LinearEquation(x1, y1, x2, y2);
+            LinearEquation equation = new LinearEquation(x1, y1, x2, y2); //real stuff
             System.out.println(equation.lineInfo());
             System.out.println();
 
-            System.out.print("Enter an x-value: ");
+            System.out.print("Enter an x-value: "); //gives y-value based on corresponding x-value
             double xValue = scanner.nextDouble();
             System.out.println();
             System.out.println("The y-value for this point is: " + equation.coordinateForX(xValue));
